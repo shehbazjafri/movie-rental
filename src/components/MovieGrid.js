@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import MovieDetailsModal from "./MovieDetailsModal";
 
 const StyledMovieGrid = styled.div`
   display: grid;
@@ -46,10 +47,25 @@ const StyledButtonContainer = styled.div`
 `;
 
 function MovieGrid({ movies, addToCart }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState({});
+
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <StyledMovieGrid>
       {movies.map((movie, index) => (
-        <StyledMovieGridItem key={`${movie.imdbID}-${index}`}>
+        <StyledMovieGridItem
+          key={`${movie.imdbID}-${index}`}
+          onClick={() => handleMovieClick(movie)}
+        >
           <img src={movie.Poster} alt={movie.Title} />
           <StyledButtonContainer>
             <IconButton
@@ -57,7 +73,10 @@ function MovieGrid({ movies, addToCart }) {
               style={{
                 color: "#fff",
               }}
-              onClick={() => addToCart(movie)}
+              onClick={(e) => {
+                e.stopPropagation();
+                addToCart(movie);
+              }}
             >
               Add to Cart
               <AddShoppingCartIcon
@@ -70,6 +89,14 @@ function MovieGrid({ movies, addToCart }) {
           </StyledButtonContainer>
         </StyledMovieGridItem>
       ))}
+      {showModal && (
+        <MovieDetailsModal
+          open={showModal}
+          onClose={handleCloseModal}
+          movie={selectedMovie}
+          addToCart={addToCart}
+        />
+      )}
     </StyledMovieGrid>
   );
 }
