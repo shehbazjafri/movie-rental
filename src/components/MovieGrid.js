@@ -42,10 +42,10 @@ const StyledButtonContainer = styled.div`
   opacity: 0;
   background: rgba(0, 0, 0, 0.5);
   transition: 0.5s ease;
-  color: #fff !important;
+  color: #fff;
 `;
 
-function MovieGrid({ movies }) {
+function MovieGrid({ movies, addToCart }) {
   return (
     <StyledMovieGrid>
       {movies.map((movie, index) => (
@@ -57,6 +57,7 @@ function MovieGrid({ movies }) {
               style={{
                 color: "#fff",
               }}
+              onClick={() => addToCart(movie)}
             >
               Add to Cart
               <AddShoppingCartIcon
