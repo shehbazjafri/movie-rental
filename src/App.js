@@ -7,6 +7,10 @@ import MovieGrid from "./components/MovieGrid";
 import SearchInput from "./components/SearchInput";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LoginModal from "./components/LoginModal";
+
+const USER_NAME = process.env.USER_NAME || "admin";
+const PASSWORD = process.env.PASSWORD || "admin_12345";
 
 const StyledHeader = styled.header`
   padding: 2rem;
@@ -23,6 +27,11 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cart, setCart] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
+
+  console.log(process.env.API_KEY);
+  console.log(process.env.USER_NAME);
 
   const getMovies = async (searchValue) => {
     const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=87b6f88e`;
@@ -33,7 +42,6 @@ function App() {
 
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data);
 
     if (data.Search) {
       setMovies(data.Search);
@@ -53,6 +61,14 @@ function App() {
     // add movie to cart if not already in cart
     if (!cart.find((m) => m.imdbID === movie.imdbID)) {
       setCart([...cart, movie]);
+    }
+  };
+
+  const handleLogin = (username, password) => {
+    if (username === USER_NAME && password === PASSWORD) {
+      setIsLoggedIn(true);
+    } else {
+      setLoginErrorMessage("Invalid credentials");
     }
   };
 
@@ -79,6 +95,11 @@ function App() {
         </StyledHeaderItems>
       </StyledHeader>
       <MovieGrid movies={movies} addToCart={handleAddToCart} />
+      <LoginModal
+        show={!isLoggedIn}
+        onLogin={handleLogin}
+        error={loginErrorMessage}
+      />
     </>
   );
 }
