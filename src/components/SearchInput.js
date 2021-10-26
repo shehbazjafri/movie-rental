@@ -8,25 +8,25 @@ import IconButton from "@mui/material/IconButton";
 const StyledTextField = styled(TextField)`
   width: 30rem;
   border-radius: 20px;
-  color: white;
+  color: var(--white);
   .MuiFormControl-root {
-    border: 1.5px solid grey;
+    border: 1.5px solid var(--grey);
     border-radius: 10px;
-    color: white;
+    color: var(--white);
   }
   .MuiInputLabel-root {
-    color: grey;
+    color: var(--grey);
   }
   & .MuiOutlinedInput-root {
     border-radius: 20px;
-    border-color: white;
-    color: white;
+    border-color: var(--white);
+    color: var(--white);
 
     fieldset {
-      border-color: white;
+      border-color: var(--white);
     }
     &.Mui-focused fieldset {
-      border-color: white;
+      border-color: var(--white);
     }
   }
 `;

@@ -43,7 +43,9 @@ function LoginModal({ show, onLogin, error }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <DialogContentText style={{ color: "red" }}>{error}</DialogContentText>
+        <DialogContentText style={{ color: "var(--red)" }}>
+          {error}
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleLogin}>LogIn</Button>

@@ -16,7 +16,6 @@ function MovieDetailsModal({ open, onClose, movie, addToCart }) {
     const apiUrl = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${process.env.REACT_APP_API_KEY}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log({ data });
     setMovieDetails(data);
   };
 
@@ -73,8 +72,8 @@ function MovieDetailsModal({ open, onClose, movie, addToCart }) {
             onClick={onClose}
             color="primary"
             style={{
-              backgroundColor: "#2ACAEA",
-              color: "#fff",
+              backgroundColor: "var(--lightblue)",
+              color: "var(--white)",
               fontSize: "1rem",
             }}
           >
@@ -88,8 +87,8 @@ function MovieDetailsModal({ open, onClose, movie, addToCart }) {
             color="primary"
             autoFocus
             style={{
-              backgroundColor: "#9AB973",
-              color: "#fff",
+              backgroundColor: "var(--lightgreen)",
+              color: "var(--white)",
               fontSize: "1rem",
             }}
           >

@@ -20,8 +20,8 @@ const StyledMovieGridItem = styled.div`
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
-  background-color: #fff;
-  box-shadow: 0 0 5px #ccc;
+  background-color: var(--white);
+  box-shadow: 0 0 5px var(--grey);
   position: relative;
   &:hover {
     cursor: pointer;
@@ -41,9 +41,9 @@ const StyledButtonContainer = styled.div`
   background-color: white;
   width: 100%;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--black05);
   transition: 0.5s ease;
-  color: #fff;
+  color: var(--white);
 `;
 
 function MovieGrid({ movies, addToCart }) {
@@ -71,7 +71,7 @@ function MovieGrid({ movies, addToCart }) {
             <IconButton
               aria-label="add to shopping cart"
               style={{
-                color: "#fff",
+                color: "var(--white)",
               }}
               onClick={(e) => {
                 e.stopPropagation();

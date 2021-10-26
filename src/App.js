@@ -18,22 +18,30 @@ const StyledHeader = styled.header`
   padding: 2rem;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
 `;
 
 const StyledHeaderItems = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const StyledLogoutButton = styled(Button)`
   &.MuiButton-outlined {
-    border: 1.5px solid darkgray;
+    border: 1.5px solid var(--darkgrey);
     height: 4rem;
-    color: white;
+    color: var(--white);
   }
   &.MuiButton-outlined:hover {
-    border: 1.5px solid darkgray;
+    border: 1.5px solid var(--darkgrey);
   }
 `;
 
@@ -45,6 +53,7 @@ function App() {
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
 
   const getCart = () => {
+    // get cart from local storage
     const cart = localStorage.getItem("cart");
     if (cart) {
       setCart(JSON.parse(cart));
@@ -52,16 +61,15 @@ function App() {
   };
 
   const getLoginStatus = () => {
+    // get login status from local storage
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn) {
       setIsLoggedIn(JSON.parse(isLoggedIn));
-      // get cart from local storage
       getCart();
     }
   };
 
   useEffect(() => {
-    // get login status from local storage
     getLoginStatus();
   }, []);
 
