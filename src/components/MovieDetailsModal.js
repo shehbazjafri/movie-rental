@@ -13,7 +13,7 @@ function MovieDetailsModal({ open, onClose, movie, addToCart }) {
   const [movieDetails, setMovieDetails] = useState(null);
 
   const getMovieDetails = async (movie) => {
-    const apiUrl = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${process.env.REACT_APP_API_KEY}`;
+    const apiUrl = `https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${process.env.REACT_APP_API_KEY}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     setMovieDetails(data);

@@ -70,7 +70,7 @@ function App() {
 
   const getMovies = async (searchValue) => {
     try {
-      const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
+      const apiUrl = `https://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
 
       if (searchValue === "") {
         return;
