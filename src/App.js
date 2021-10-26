@@ -10,8 +10,9 @@ import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginModal from "./components/LoginModal";
 
-const USER_NAME = process.env.USER_NAME || "admin";
-const PASSWORD = process.env.PASSWORD || "admin_12345";
+const USER_NAME = process.env.REACT_APP_USER_NAME;
+const PASSWORD = process.env.REACT_APP_PASSWORD;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const StyledHeader = styled.header`
   padding: 2rem;
@@ -65,7 +66,7 @@ function App() {
   }, []);
 
   const getMovies = async (searchValue) => {
-    const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=87b6f88e`;
+    const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
 
     if (searchValue === "") {
       return;
