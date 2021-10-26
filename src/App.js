@@ -69,17 +69,21 @@ function App() {
   }, []);
 
   const getMovies = async (searchValue) => {
-    const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
+    try {
+      const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`;
 
-    if (searchValue === "") {
-      return;
-    }
+      if (searchValue === "") {
+        return;
+      }
 
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+      const response = await fetch(apiUrl);
+      const data = await response.json();
 
-    if (data.Search) {
-      setMovies(data.Search);
+      if (data.Search) {
+        setMovies(data.Search);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
