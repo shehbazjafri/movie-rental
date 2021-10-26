@@ -1,45 +1,59 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import "normalize.css";
 import GlobalStyles from "./styles/GlobalStyles";
 import Typography from "./styles/Typography";
-import Header from "./components/Header";
+import MovieGrid from "./components/MovieGrid";
+import SearchInput from "./components/SearchInput";
 
-const StyledMovieGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  justify-items: center;
-  gap: 1rem;
-  margin: 1rem;
+const StyledHeader = styled.header`
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const apiUrl = `http://www.omdbapi.com/?s=Guardians&apikey=87b6f88e`;
+  const [searchValue, setSearchValue] = useState("");
 
-  const getMovies = async () => {
+  const getMovies = async (searchValue) => {
+    const apiUrl = `http://www.omdbapi.com/?s=${searchValue}&apikey=87b6f88e`;
+
+    if (searchValue === "") {
+      return;
+    }
+
     const response = await fetch(apiUrl);
     const data = await response.json();
     console.log(data);
-    setMovies(data.Search);
+
+    if (data.Search) {
+      setMovies(data.Search);
+    }
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    setSearchValue(e.target.value);
+  };
+
+  const handleSearch = (value) => {
+    getMovies(value);
+  };
 
   return (
     <>
       <GlobalStyles />
       <Typography />
-      <Header />
-      <StyledMovieGrid>
-        {movies.map((movie) => (
-          <div key={movie.imdbID} className="movie">
-            <img src={movie.Poster} alt={movie.Title} />
-          </div>
-        ))}
-      </StyledMovieGrid>
+      <StyledHeader>
+        <h1>Movies</h1>
+        <SearchInput
+          value={searchValue}
+          onChange={handleSearchChange}
+          onSearch={handleSearch}
+        />
+      </StyledHeader>
+      <MovieGrid movies={movies} />
     </>
   );
 }
