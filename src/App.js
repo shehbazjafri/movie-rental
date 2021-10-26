@@ -52,24 +52,19 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
 
-  const getCart = () => {
-    // get cart from local storage
-    const cart = localStorage.getItem("cart");
-    if (cart) {
-      setCart(JSON.parse(cart));
-    }
-  };
-
-  const getLoginStatus = () => {
-    // get login status from local storage
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn) {
-      setIsLoggedIn(JSON.parse(isLoggedIn));
-      getCart();
-    }
-  };
-
   useEffect(() => {
+    const getLoginStatus = () => {
+      // get login status from local storage
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      if (isLoggedIn) {
+        setIsLoggedIn(JSON.parse(isLoggedIn));
+        // get cart from local storage
+        const cart = localStorage.getItem("cart");
+        if (cart) {
+          setCart(JSON.parse(cart));
+        }
+      }
+    };
     getLoginStatus();
   }, []);
 
