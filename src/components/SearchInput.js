@@ -35,7 +35,7 @@ function SearchInput({ onChange, value, onSearch }) {
   return (
     <div>
       <StyledTextField
-        label="Search"
+        label="Search for movies..."
         type="search"
         variant="outlined"
         onChange={onChange}

@@ -9,6 +9,7 @@ import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginModal from "./components/LoginModal";
+import { defaultMovies } from "./utils/constants";
 
 const USER_NAME = process.env.REACT_APP_USER_NAME;
 const PASSWORD = process.env.REACT_APP_PASSWORD;
@@ -46,7 +47,7 @@ const StyledLogoutButton = styled(Button)`
 `;
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(defaultMovies);
   const [searchValue, setSearchValue] = useState("");
   const [cart, setCart] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
